@@ -1,26 +1,62 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hdt_flutter/models/restaurante_model.dart';
 import 'package:hdt_flutter/utils/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hdt_flutter/widgets/card_restaurantes.dart';
 
 class RestaurantesView extends StatelessWidget {
   const RestaurantesView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> images = [
-      'assets/logo.png',
-      'assets/icono_resta.png',
-      'assets/icono_resta.png',
-      'assets/logo.png',
-      'assets/logo.png',
-      'assets/logo.png',
-      'assets/logo.png',
-      'assets/icono_resta.png',
-
+    final List<RestauranteModels> resta = [
+      RestauranteModels(
+        id: "1",
+        nombre: "Pueblo Nuevo",
+        imagen: 'assets/resta1.jpg',
+        descripcion: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et congue dolor. Sed posuere eleifend mi, sed malesuada felis maximus ut. Duis facilisis, ligula et faucibus luctus, purus dui commodo massa, et vestibulum lacus sem non diam.",
+        estado: true,
+        mesas: [],
+        menu: [],
+      ),
+      RestauranteModels(
+        id: "2",
+        nombre: "Abdón Calderón",
+        imagen: 'assets/resta2.jpg',
+        descripcion: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et congue dolor. Sed posuere eleifend mi, sed malesuada felis maximus ut. Duis facilisis, ligula et faucibus luctus, purus dui commodo massa, et vestibulum lacus sem non diam.",
+        estado: true,
+        mesas: [],
+        menu: [],
+      ),
+      RestauranteModels(
+        id: "3",
+        nombre: "Alhajuela",
+        imagen: 'assets/resta3.jpg',
+        descripcion: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et congue dolor. Sed posuere eleifend mi, sed malesuada felis maximus ut. Duis facilisis, ligula et faucibus luctus, purus dui commodo massa, et vestibulum lacus sem non diam.",
+        estado: false,
+        mesas: [],
+        menu: [],
+      ),
+      RestauranteModels(
+        id: "3",
+        nombre: "Chirijos",
+        imagen: 'assets/resta5.jpg',
+        descripcion: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et congue dolor. Sed posuere eleifend mi, sed malesuada felis maximus ut. Duis facilisis, ligula et faucibus luctus, purus dui commodo massa, et vestibulum lacus sem non diam.",
+        estado: true,
+        mesas: [],
+        menu: [],
+      ),
+      RestauranteModels(
+        id: "3",
+        nombre: "San Plácido",
+        imagen: 'assets/resta4.jpg',
+        descripcion: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et congue dolor. Sed posuere eleifend mi, sed malesuada felis maximus ut. Duis facilisis, ligula et faucibus luctus, purus dui commodo massa, et vestibulum lacus sem non diam.",
+        estado: true,
+        mesas: [],
+        menu: [],
+      ),
       // Agrega aquí todas las rutas de tus imágenes
     ];
     return Scaffold(
@@ -28,7 +64,7 @@ class RestaurantesView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle.light,
         iconTheme: IconThemeData(color: principal),
-        leadingWidth: 140,
+        leadingWidth: 200,
         leading: Row(
           children: [
             IconButton(
@@ -42,6 +78,7 @@ class RestaurantesView extends StatelessWidget {
               style: TextStyle(
                 color: principal,
                 fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
             )
           ],
@@ -52,94 +89,38 @@ class RestaurantesView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            itemResta(images[0], i: 0),
+            CardRestaurantes(
+              restaurante: resta[0],
+              height: 175,
+              onTap: () {
+                context.push("/detalleRestaurante", extra: resta[0]);
+              },
+            ),
             const SizedBox(height: 10),
             SizedBox(
-              height: images.length * 100,
+              height: resta.length * 100,
               child: GridView.builder(
-                itemCount: images.length - 1,
+                itemCount: resta.length - 1,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // Número de columnas en la cuadrícula
                   mainAxisSpacing: 5.0, // Espacio vertical entre los elementos
                   crossAxisSpacing: 5.0, // Espacio horizontal entre los elementos
+                  childAspectRatio: 1.1,
                 ),
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   int i = index + 1;
-                  return itemResta(images[i], height: 140, width: 300, i: i);
+                  return CardRestaurantes(
+                    restaurante: resta[i],
+                    onTap: () {
+                      context.push("/detalleRestaurante", extra: resta[i]);
+                    },
+                  );
                 },
               ),
             )
-            // ListView.builder(
-            //   shrinkWrap: true,
-            //   itemCount: (images.length - 1),
-            //   physics: const NeverScrollableScrollPhysics(),
-            //   itemBuilder: (context, index) {
-            //     final int firstImageIndex = index * 2 + 1;
-            //     final int secondImageIndex = firstImageIndex + 1;
-            //     return Row(
-            //       children: <Widget>[
-            //         Expanded(
-            //           child: itemResta(images[firstImageIndex], height: 140, width: 300),
-            //         ),
-            //         images.length < (secondImageIndex + 1)
-            //             ? Container(
-            //                 child: Text("${images.length}"),
-            //               )
-            //             : Expanded(
-            //                 child: itemResta(images[secondImageIndex], height: 140, width: 300),
-            //               ),
-            //       ],
-            //     );
-            //   },
-            // ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget itemResta(String images, {double? height, double? width, required int i}) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Stack(
-        children: [
-          Image.asset(
-            images,
-            fit: BoxFit.cover,
-            height: height,
-            width: width,
-            // height: 140,
-            // width: 300,
-          ),
-          const Positioned(
-            top: 20,
-            left: 20,
-            child: Icon(
-              Icons.location_on_outlined,
-            ),
-          ),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            child: Row(
-              children: [
-                const Text("Text Nombre"),
-                const SizedBox(width: 5),
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: (Random().nextInt(22) ~/ 2).isEven ? Colors.red : Colors.green,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hdt_flutter/utils/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hdt_flutter/widgets/card_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -13,94 +13,24 @@ class HomeView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Card(
-            child: Container(
-              decoration: BoxDecoration(
-                color: principal,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    context.goNamed("restaurante");
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              AppLocalizations.of(context)!.restaurante,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Image(
-                          image: AssetImage("assets/icono_resta.png"),
-                          width: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          CardWidget(
+            height: 150,
+            text: AppLocalizations.of(context)!.restaurante,
+            image: "assets/mesarestaurante.png",
+            widthimage: 100,
+            heightimage: 100,
+            onpre: () {
+              context.goNamed("restaurante");
+            },
           ),
           const SizedBox(height: 16),
-          Card(
-            child: Container(
-              decoration: BoxDecoration(
-                color: principal,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              AppLocalizations.of(context)!.miorden,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Image(
-                          image: AssetImage("assets/icono_resta.png"),
-                          width: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          CardWidget(
+            height: 150,
+            image: "assets/myorden.png",
+            widthimage: 100,
+            heightimage: 100,
+            text: AppLocalizations.of(context)!.miorden,
+            onpre: () {},
           ),
         ],
       ),

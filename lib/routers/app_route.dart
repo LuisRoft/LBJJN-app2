@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hdt_flutter/models/menu_model.dart';
+import 'package:hdt_flutter/models/restaurante_model.dart';
 import 'package:hdt_flutter/providers/menu_providers.dart';
 import 'package:hdt_flutter/utils/const.dart';
 import 'package:hdt_flutter/view/buscar_view.dart';
 import 'package:hdt_flutter/view/carrito_view.dart';
 import 'package:hdt_flutter/view/delivery_view.dart';
+import 'package:hdt_flutter/view/detalle_restaurante_view.dart';
 import 'package:hdt_flutter/view/favoritos_view.dart';
 import 'package:hdt_flutter/view/home_view.dart';
 import 'package:hdt_flutter/view/idioma_view.dart';
 import 'package:hdt_flutter/view/login_view.dart';
 import 'package:hdt_flutter/view/perfil_view.dart';
+import 'package:hdt_flutter/view/platos_recomendados_view.dart';
 import 'package:hdt_flutter/view/restaurante_view.dart';
 import 'package:provider/provider.dart';
-
-String idioma = "/idioma";
-String login = "/login";
-String avatar = "/avatar";
-String home = "/home";
-String restaurante = "/restaurante/:id";
 
 class AppRouter {
   static GoRouter config() {
     return GoRouter(
-      initialLocation: "/",
+      initialLocation: "/platosRecomendados",
       routes: [
         ShellRoute(
           builder: (context, state, child) {
@@ -151,28 +149,77 @@ class AppRouter {
               },
             ),
             GoRoute(
-                path: '/home',
-                name: '/home',
-                pageBuilder: (context, state) {
-                  return NoTransitionPage<void>(
-                    key: state.pageKey,
-                    restorationId: state.pageKey.value,
-                    child: const HomeView(),
-                  );
-                },
-                routes: [
-                  GoRoute(
-                    path: 'restaurante',
-                    name: 'restaurante',
-                    pageBuilder: (context, state) {
-                      return NoTransitionPage<void>(
-                        key: state.pageKey,
-                        restorationId: state.pageKey.value,
-                        child: const RestaurantesView(),
-                      );
-                    },
-                  ),
-                ]),
+              path: '/home',
+              name: '/home',
+              pageBuilder: (context, state) {
+                return NoTransitionPage<void>(
+                  key: state.pageKey,
+                  restorationId: state.pageKey.value,
+                  child: const HomeView(),
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: 'restaurante',
+                  name: 'restaurante',
+                  pageBuilder: (context, state) {
+                    return NoTransitionPage<void>(
+                      key: state.pageKey,
+                      restorationId: state.pageKey.value,
+                      child: const RestaurantesView(),
+                    );
+                  },
+                ),
+              ],
+            ),
+            GoRoute(
+              path: '/platosRecomendados',
+              name: '/platosRecomendados',
+              pageBuilder: (context, state) {
+                // RestauranteModels da = state.extra as RestauranteModels;
+                RestauranteModels da = RestauranteModels(
+                  id: "2",
+                  nombre: "Abdón Calderón",
+                  imagen: 'assets/resta2.jpg',
+                  descripcion: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et congue dolor. Sed posuere eleifend mi, sed malesuada felis maximus ut. Duis facilisis, ligula et faucibus luctus, purus dui commodo massa, et vestibulum lacus sem non diam.",
+                  estado: true,
+                  mesas: [],
+                  menu: [
+                    MenuModels(
+                      id: "",
+                      nombre: "nombre",
+                      descripcion: "descripcion",
+                      estado: true,
+                      imagen: "imagen",
+                    ),
+                    MenuModels(
+                      id: "",
+                      nombre: "nombre",
+                      descripcion: "descripcion",
+                      estado: true,
+                      imagen: "imagen",
+                    )
+                  ],
+                );
+                return NoTransitionPage<void>(
+                  key: state.pageKey,
+                  restorationId: state.pageKey.value,
+                  child: PlatosRecomendadosView(data: da),
+                );
+              },
+            ),
+            GoRoute(
+              path: '/detalleRestaurante',
+              name: '/detalleRestaurante',
+              pageBuilder: (context, state) {
+                RestauranteModels da = state.extra as RestauranteModels;
+                return NoTransitionPage<void>(
+                  key: state.pageKey,
+                  restorationId: state.pageKey.value,
+                  child: DetalleRestauranteView(data: da),
+                );
+              },
+            ),
             GoRoute(
               path: '/buscar',
               name: '/buscar',

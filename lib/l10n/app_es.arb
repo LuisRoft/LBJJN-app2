@@ -27,5 +27,17 @@
     "miorden":"Mi orden",
     "@miorden":{
         "description":"a welcome message"
+    },
+     "platosrecomendados":"Platos recomendados",
+    "@platosrecomendados":{
+        "description":"a welcome message"
+    },
+     "mesasdisponibles":"Mesas disponibles",
+    "@mesasdisponibles":{
+        "description":"a welcome message"
+    },
+     "menu":"Menu",
+    "@menu":{
+        "description":"a welcome message"
     }
 }

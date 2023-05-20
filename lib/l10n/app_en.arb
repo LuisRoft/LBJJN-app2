@@ -4,6 +4,9 @@
     "hola":"Hello {username}",
     "selecionaidioma":"Select a language",
     "restaurante":"Restaurants",
-    "miorden":"my order"
+    "platosrecomendados":"Recommended Dishes",
+    "mesasdisponibles":"Available Tables",
+    "menu":"Menu",
+    "miorden":"My order"
 
 }

@@ -13,7 +13,7 @@ class IdiomaProviders extends ChangeNotifier {
   }
 
   getidioma() {
-    idioma = SharedPreferenceHelper.getString("idioma");
+    idioma = SharedPreferenceHelper.getString("idioma") == 'N/A' ? 'es' : SharedPreferenceHelper.getString("idioma");
     notifyListeners();
   }
 }
