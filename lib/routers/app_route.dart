@@ -21,7 +21,7 @@ import 'package:provider/provider.dart';
 class AppRouter {
   static GoRouter config() {
     return GoRouter(
-      initialLocation: "/platosRecomendados",
+      initialLocation: "/",
       routes: [
         ShellRoute(
           builder: (context, state, child) {

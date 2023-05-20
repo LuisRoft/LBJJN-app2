@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hdt_flutter/utils/const.dart';
 
 class CardDetallesWidget extends StatelessWidget {
-  const CardDetallesWidget({super.key, this.text, required this.height, required this.image, required this.onpre});
-  final String? text;
+  const CardDetallesWidget({super.key, required this.text, required this.height, required this.image, required this.onpre});
+  final String text;
   final String image;
   final double height;
   final Null Function() onpre;
@@ -30,23 +30,18 @@ class CardDetallesWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  text == null
-                      ? Container()
-                      : FittedBox(
-                          child: Text(
-                            text!,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                  Expanded(
-                    child: Image(
-                      image: AssetImage(image),
-                      fit: BoxFit.cover,
+                  FittedBox(
+                    child: Text(
+                      text,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
+                  ),
+                  Image(
+                    image: AssetImage(image),
+                    fit: BoxFit.contain,
                   )
                 ],
               ),

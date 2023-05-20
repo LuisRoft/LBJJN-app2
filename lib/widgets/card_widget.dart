@@ -54,7 +54,6 @@ class CardWidget extends StatelessWidget {
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
@@ -80,7 +79,7 @@ class CardWidget extends StatelessWidget {
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontFamily: 'FutuBk',
                       ),
                     ),
                   ],

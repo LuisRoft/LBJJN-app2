@@ -56,6 +56,7 @@ class MyMaterialApp extends StatelessWidget {
       ],
       theme: ThemeData(
         primarySwatch: createMaterialColor(principal),
+        fontFamily: 'FutuBk',
       ),
       routerConfig: AppRouter.config(),
     );

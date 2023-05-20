@@ -45,7 +45,13 @@ class _IdiomaViewState extends State<IdiomaView> {
               items: const [
                 DropdownMenuItem<String>(
                   value: "es",
-                  child: Text("Español"),
+                  child: Text(
+                    "Español",
+                    style: TextStyle(
+                      fontFamily: AutofillHints.creditCardGivenName,
+                      // fontStyle: FontStyle.italic,
+                    ),
+                  ),
                 ),
                 DropdownMenuItem<String>(
                   value: "en",
