@@ -1,0 +1,9 @@
+{
+    "idioma":"English",
+    "holaMundo":"Hello word",
+    "hola":"Hello {username}",
+    "selecionaidioma":"Select a language",
+    "restaurante":"Restaurants",
+    "miorden":"my order"
+
+}
