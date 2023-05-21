@@ -5,6 +5,7 @@ class IdiomaProviders extends ChangeNotifier {
   late String idioma;
   IdiomaProviders() {
     getidioma();
+    debugPrint(idioma);
   }
   setIdioma(String id) {
     idioma = id;
@@ -13,7 +14,12 @@ class IdiomaProviders extends ChangeNotifier {
   }
 
   getidioma() {
-    idioma = SharedPreferenceHelper.getString("idioma") == 'N/A' ? 'es' : SharedPreferenceHelper.getString("idioma");
+    if (SharedPreferenceHelper.getString("idioma") == 'N/A') {
+      idioma = 'es';
+      SharedPreferenceHelper.setString("idioma", 'es');
+    } else {
+      idioma = SharedPreferenceHelper.getString("idioma");
+    }
     notifyListeners();
   }
 }

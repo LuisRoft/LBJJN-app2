@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hdt_flutter/models/menu_model.dart';
 import 'package:hdt_flutter/models/restaurante_model.dart';
 import 'package:hdt_flutter/providers/menu_providers.dart';
 import 'package:hdt_flutter/utils/const.dart';
@@ -13,6 +12,8 @@ import 'package:hdt_flutter/view/favoritos_view.dart';
 import 'package:hdt_flutter/view/home_view.dart';
 import 'package:hdt_flutter/view/idioma_view.dart';
 import 'package:hdt_flutter/view/login_view.dart';
+import 'package:hdt_flutter/view/menu_view.dart';
+import 'package:hdt_flutter/view/mesas_view.dart';
 import 'package:hdt_flutter/view/perfil_view.dart';
 import 'package:hdt_flutter/view/platos_recomendados_view.dart';
 import 'package:hdt_flutter/view/restaurante_view.dart';
@@ -176,35 +177,68 @@ class AppRouter {
               path: '/platosRecomendados',
               name: '/platosRecomendados',
               pageBuilder: (context, state) {
-                // RestauranteModels da = state.extra as RestauranteModels;
-                RestauranteModels da = RestauranteModels(
-                  id: "2",
-                  nombre: "Abdón Calderón",
-                  imagen: 'assets/resta2.jpg',
-                  descripcion: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et congue dolor. Sed posuere eleifend mi, sed malesuada felis maximus ut. Duis facilisis, ligula et faucibus luctus, purus dui commodo massa, et vestibulum lacus sem non diam.",
-                  estado: true,
-                  mesas: [],
-                  menu: [
-                    MenuModels(
-                      id: "",
-                      nombre: "nombre",
-                      descripcion: "descripcion",
-                      estado: true,
-                      imagen: "imagen",
-                    ),
-                    MenuModels(
-                      id: "",
-                      nombre: "nombre",
-                      descripcion: "descripcion",
-                      estado: true,
-                      imagen: "imagen",
-                    )
-                  ],
-                );
+                RestauranteModels da = state.extra as RestauranteModels;
                 return NoTransitionPage<void>(
                   key: state.pageKey,
                   restorationId: state.pageKey.value,
                   child: PlatosRecomendadosView(data: da),
+                );
+              },
+            ),
+            GoRoute(
+              path: '/Menu',
+              name: '/Menu',
+              pageBuilder: (context, state) {
+                RestauranteModels da = state.extra as RestauranteModels;
+                // final RestauranteModels da = RestauranteModels(
+                //   id: "id",
+                //   nombre: "Restaurante ",
+                //   descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur felis ante, placerat id blandit vitae, dapibus id mi. Nam lacus magna, aliquam ut mattis ut, porttitor sed quam. Vivamus erat.",
+                //   estado: true,
+                //   imagen: 'https://via.placeholder.com/640x480.png/a59090/000000?Text=640x480',
+                //   mesas: List.generate(
+                //     2,
+                //     (index) => MesasModels(
+                //       id: "id$index",
+                //       nombre: "Mesa $index",
+                //       descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur felis ante, placerat id blandit vitae, dapibus id mi. Nam lacus magna, aliquam ut mattis ut, porttitor sed quam. Vivamus erat.",
+                //       estado: true,
+                //       imagen: 'https://via.placeholder.com/640x480.png/a59090/000000?Text=640x480',
+                //       canti: 4,
+                //     ),
+                //   ),
+                //   menu: List.generate(
+                //     5,
+                //     (indexm) => MenuModels(
+                //       id: "id$indexm",
+                //       nombre: "Caldo de gallina criolla $indexm",
+                //       descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur felis ante, placerat id blandit vitae, dapibus id mi. Nam lacus magna, aliquam ut mattis ut, porttitor sed quam. Vivamus erat.",
+                //       estado: true,
+                //       imagen: 'https://via.placeholder.com/640x480.png/a59090/000000?Text=640x480',
+                //       recomendado: true,
+                //       categoria: "categoria ${indexm ~/ 2}",
+                //       ingredientes: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur felis ante, placerat id blandit vitae, dapibus id mi. Nam lacus magna, aliquam ut mattis ut, porttitor sed quam. Vivamus erat.",
+                //       precio: "precio",
+                //     ),
+                //   ),
+                // );
+
+                return NoTransitionPage<void>(
+                  key: state.pageKey,
+                  restorationId: state.pageKey.value,
+                  child: MenuView(data: da),
+                );
+              },
+            ),
+            GoRoute(
+              path: '/Mesas',
+              name: '/Mesas',
+              pageBuilder: (context, state) {
+                RestauranteModels da = state.extra as RestauranteModels;
+                return NoTransitionPage<void>(
+                  key: state.pageKey,
+                  restorationId: state.pageKey.value,
+                  child: MesasView(data: da),
                 );
               },
             ),

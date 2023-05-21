@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hdt_flutter/models/restaurante_model.dart';
 import 'package:hdt_flutter/utils/const.dart';
@@ -23,12 +24,34 @@ class CardRestaurantes extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               child: ColorFiltered(
                 colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.saturation),
-                child: Image(
-                  image: AssetImage(restaurante.imagen),
+                child: CachedNetworkImage(
+                  imageUrl: restaurante.imagen,
+                  progressIndicatorBuilder: (context, url, downloadProgress) => Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Material(
+                        color: Colors.transparent,
+                        child: CircularProgressIndicator(
+                          value: downloadProgress.progress,
+                        ),
+                      ),
+                    ],
+                  ),
+                  errorWidget: (context, url, error) {
+                    return const Icon(Icons.error);
+                  },
                   fit: BoxFit.cover,
-                  filterQuality: FilterQuality.low,
-                  height: height,
                 ),
+                // child: Image(
+                //   image: CachedNetworkImageProvider(
+                //     restaurante.imagen,
+                //     errorListener: () {},
+                //   ),
+                //   fit: BoxFit.cover,
+                //   filterQuality: FilterQuality.low,
+                //   height: height,
+                // ),
               ),
             ),
             Material(

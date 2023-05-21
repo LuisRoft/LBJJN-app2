@@ -6,7 +6,11 @@
     "restaurante":"Restaurants",
     "platosrecomendados":"Recommended Dishes",
     "mesasdisponibles":"Available Tables",
+    "mesa":"Tables",
+    "cantpersonas":"Amount of people",
     "menu":"Menu",
+    "pers":"{cantidad} peoples",
     "miorden":"My order"
+    
 
 }

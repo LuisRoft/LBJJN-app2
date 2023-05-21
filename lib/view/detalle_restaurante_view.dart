@@ -49,7 +49,7 @@ class DetalleRestauranteView extends StatelessWidget {
               text: AppLocalizations.of(context)!.platosrecomendados,
               image: "assets/platos.png",
               onpre: () {
-                context.push("/platosRecomendados");
+                context.push("/platosRecomendados", extra: data);
               },
             ),
             Row(
@@ -59,7 +59,9 @@ class DetalleRestauranteView extends StatelessWidget {
                     height: size.height * 0.35,
                     text: AppLocalizations.of(context)!.mesasdisponibles,
                     image: "assets/mesas disponibles.png",
-                    onpre: () {},
+                    onpre: () {
+                      context.push("/Mesas", extra: data);
+                    },
                     widthimage: 100,
                     heightimage: 0,
                     posicion: false,
@@ -73,7 +75,9 @@ class DetalleRestauranteView extends StatelessWidget {
                     image: "assets/menu.png",
                     widthimage: 230,
                     heightimage: 123,
-                    onpre: () {},
+                    onpre: () {
+                      context.push("/menu", extra: data);
+                    },
                     posicion: true,
                   ),
                 ),

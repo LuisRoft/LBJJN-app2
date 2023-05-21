@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hdt_flutter/firebase_options.dart';
 import 'package:hdt_flutter/helpers/shared_preference_helper.dart';
 import 'package:hdt_flutter/l10n/l10n.dart';
+import 'package:hdt_flutter/providers/data_providers.dart';
 import 'package:hdt_flutter/providers/idioma_providers.dart';
 import 'package:hdt_flutter/providers/menu_providers.dart';
 import 'package:hdt_flutter/routers/app_route.dart';
@@ -29,16 +30,27 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => IdiomaProviders(), lazy: true),
         ChangeNotifierProvider(create: (_) => MenuProviders()),
+        ChangeNotifierProvider(create: (_) => DataProviders(), lazy: true),
       ],
       child: const MyMaterialApp(),
     );
   }
 }
 
-class MyMaterialApp extends StatelessWidget {
+class MyMaterialApp extends StatefulWidget {
   const MyMaterialApp({
     super.key,
   });
+
+  @override
+  State<MyMaterialApp> createState() => _MyMaterialAppState();
+}
+
+class _MyMaterialAppState extends State<MyMaterialApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

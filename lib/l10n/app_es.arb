@@ -32,11 +32,28 @@
     "@platosrecomendados":{
         "description":"a welcome message"
     },
-     "mesasdisponibles":"Mesas disponibles",
+    "mesasdisponibles":"Mesas disponibles",
     "@mesasdisponibles":{
         "description":"a welcome message"
     },
-     "menu":"Menu",
+    "mesa":"Mesa",
+    "@mesa":{
+        "description":"a welcome message"
+    },
+    "cantpersonas":"Cantidad de personas",
+    "@cantpersonas":{
+        "description":"a welcome message"
+    },
+    "pers":"{cantidad} personas",
+    "@holapers":{
+        "description":"a welcome message",
+        "placeholders":{
+            "cantidad":{
+                "type":"String"
+            }
+        }
+    },
+    "menu":"Menu",
     "@menu":{
         "description":"a welcome message"
     }

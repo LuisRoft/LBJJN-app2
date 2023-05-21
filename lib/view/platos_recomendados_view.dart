@@ -40,10 +40,15 @@ class PlatosRecomendadosView extends StatelessWidget {
       body: ListView.builder(
         itemCount: data.menu.length,
         itemBuilder: (context, index) {
-          return CardPlatos(
-            menu: data.menu[index],
-            onTap: () {},
-          );
+          if (data.menu[index].recomendado) {
+            return CardPlatos(
+              height: 200,
+              menu: data.menu[index],
+              onTap: () {},
+            );
+          } else {
+            return Container();
+          }
         },
       ),
     );

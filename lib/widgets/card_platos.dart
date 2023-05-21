@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hdt_flutter/models/menu_model.dart';
+import 'package:hdt_flutter/utils/const.dart';
 
 class CardPlatos extends StatelessWidget {
   const CardPlatos({super.key, required this.menu, this.height, this.width, required this.onTap});
@@ -22,11 +24,35 @@ class CardPlatos extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               child: ColorFiltered(
                 colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.saturation),
-                child: Image(
-                  image: AssetImage(menu.imagen),
+                child: CachedNetworkImage(
+                  imageUrl: menu.imagen,
+                  progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                    child: CircularProgressIndicator(
+                      value: downloadProgress.progress,
+                      color: secundario,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) {
+                    debugPrint("Error: $error");
+                    return const Icon(Icons.error);
+                  },
                   fit: BoxFit.cover,
-                  filterQuality: FilterQuality.low,
-                  height: height,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: FittedBox(
+                  child: Text(
+                    menu.nombre,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
                 ),
               ),
             ),
