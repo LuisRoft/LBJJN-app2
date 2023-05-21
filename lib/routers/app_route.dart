@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hdt_flutter/models/restaurante_model.dart';
+import 'package:hdt_flutter/providers/carrito_provider.dart';
 import 'package:hdt_flutter/providers/menu_providers.dart';
 import 'package:hdt_flutter/utils/const.dart';
 import 'package:hdt_flutter/view/buscar_view.dart';
@@ -27,6 +28,7 @@ class AppRouter {
         ShellRoute(
           builder: (context, state, child) {
             final data = Provider.of<MenuProviders>(context);
+            final carrito = Provider.of<CarritoProviders>(context);
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
@@ -98,24 +100,50 @@ class AppRouter {
                           default:
                         }
                       },
-                      items: const [
-                        BottomNavigationBarItem(
+                      items: [
+                        const BottomNavigationBarItem(
                           icon: Icon(Icons.home_outlined),
                           label: "",
                         ),
-                        BottomNavigationBarItem(
+                        const BottomNavigationBarItem(
                           icon: Icon(Icons.search_outlined),
                           label: "",
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.shopping_cart_outlined),
+                          icon: carrito.todoCarrito.isEmpty
+                              ? const Icon(Icons.notifications)
+                              : Stack(
+                                  children: [
+                                    const Icon(Icons.notifications),
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(2.0),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.red,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Text(
+                                          "${carrito.todoCarrito.length}",
+                                          style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                          // icon: Icon(Icons.shopping_cart_outlined),
                           label: "",
                         ),
-                        BottomNavigationBarItem(
+                        const BottomNavigationBarItem(
                           icon: Icon(Icons.bookmark_outline),
                           label: "",
                         ),
-                        BottomNavigationBarItem(
+                        const BottomNavigationBarItem(
                           icon: Icon(
                             Icons.moped_outlined,
                           ),

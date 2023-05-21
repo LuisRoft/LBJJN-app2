@@ -56,5 +56,25 @@
     "menu":"Menu",
     "@menu":{
         "description":"a welcome message"
+    },
+    "nodatos":"No existe datos",
+    "@nodatos":{
+        "description":"a welcome message"
+    },
+      "cant":"Cantidad {cantidad}",
+      "@nodatos":{
+        "description":"a welcome message"
+    },
+      "agregarcarrito":"Se agrego a tu carrito",
+      "@agregarcarrito":{
+        "description":"a welcome message"
+    },
+      "select":"Selecione cantidad",
+      "@select":{
+        "description":"a welcome message"
+    },
+      "carrito":"Carrito",
+      "@carrito":{
+        "description":"a welcome message"
     }
 }

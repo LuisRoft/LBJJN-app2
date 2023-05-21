@@ -80,13 +80,17 @@ class CardRestaurantes extends StatelessWidget {
               left: 20,
               child: Row(
                 children: [
-                  FittedBox(
+                  SizedBox(
+                    width: restaurante.nombre.length >= 20 ? 140 : null,
                     child: Text(
                       restaurante.nombre,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      maxLines: 2,
                       style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
                         color: Colors.white,
+                        fontStyle: FontStyle.italic,
                       ),
                     ),
                   ),

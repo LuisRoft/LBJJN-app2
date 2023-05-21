@@ -26,7 +26,7 @@ class PlatosRecomendadosView extends StatelessWidget {
               },
             ),
             Text(
-              AppLocalizations.of(context)!.platosrecomendados,
+              "${AppLocalizations.of(context)!.platosrecomendados} ",
               style: TextStyle(
                 color: principal,
                 fontSize: 16,

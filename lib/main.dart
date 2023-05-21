@@ -4,10 +4,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hdt_flutter/firebase_options.dart';
 import 'package:hdt_flutter/helpers/shared_preference_helper.dart';
 import 'package:hdt_flutter/l10n/l10n.dart';
+import 'package:hdt_flutter/providers/carrito_provider.dart';
 import 'package:hdt_flutter/providers/data_providers.dart';
 import 'package:hdt_flutter/providers/idioma_providers.dart';
 import 'package:hdt_flutter/providers/menu_providers.dart';
 import 'package:hdt_flutter/routers/app_route.dart';
+import 'package:hdt_flutter/service/notificacion_service.dart';
 import 'package:hdt_flutter/utils/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => IdiomaProviders(), lazy: true),
         ChangeNotifierProvider(create: (_) => MenuProviders()),
         ChangeNotifierProvider(create: (_) => DataProviders(), lazy: true),
+        ChangeNotifierProvider(create: (_) => CarritoProviders()),
       ],
       child: const MyMaterialApp(),
     );
@@ -66,6 +69,7 @@ class _MyMaterialAppState extends State<MyMaterialApp> {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
+      scaffoldMessengerKey: NotificacionService.messengerKey,
       theme: ThemeData(
         primarySwatch: createMaterialColor(principal),
         fontFamily: 'FutuBk',

@@ -10,7 +10,10 @@
     "cantpersonas":"Amount of people",
     "menu":"Menu",
     "pers":"{cantidad} peoples",
+    "nodatos":"No data",
+    "cant":"Cantidad {cantidad}",
+    "agregarcarrito":"Added to your cart",
+    "select":"Select quantity",
+    "carrito":"Cart",
     "miorden":"My order"
-    
-
 }
