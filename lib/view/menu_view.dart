@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hdt_flutter/models/favorito_model.dart';
 import 'package:hdt_flutter/models/menu_model.dart';
 import 'package:hdt_flutter/models/restaurante_model.dart';
@@ -12,6 +10,7 @@ import 'package:hdt_flutter/utils/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart' show groupBy;
+import 'package:hdt_flutter/widgets/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class MenuView extends StatelessWidget {
@@ -23,31 +22,7 @@ class MenuView extends StatelessWidget {
     final carrito = Provider.of<CarritoProviders>(context);
     final datos = Provider.of<DataProviders>(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-        iconTheme: IconThemeData(color: principal),
-        leadingWidth: 200,
-        leading: Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                context.pop();
-              },
-            ),
-            Text(
-              "${AppLocalizations.of(context)!.menu} ",
-              style: TextStyle(
-                color: principal,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
-        ),
-        elevation: 0,
-      ),
+      appBar: appBars(context, AppLocalizations.of(context)!.menu),
       body: Column(
         children: [
           Expanded(
@@ -128,9 +103,9 @@ class MenuView extends StatelessWidget {
                                                             );
                                                             carrito.setaddCarrito(data1);
                                                             NotificacionService.showSnackbarError(AppLocalizations.of(context)!.agregarcarrito);
-                                                            Future.delayed(const Duration(seconds: 2), () {
-                                                              context.push("/carrito");
-                                                            });
+                                                            // Future.delayed(const Duration(seconds: 2), () {
+                                                            //   context.push("/carrito");
+                                                            // });
                                                           }
                                                         : () {
                                                             carrito.setSelet(index, index2, 0);

@@ -29,17 +29,19 @@ class DataProviders extends ChangeNotifier {
 
     enveRemove = database.child("Datos/restaurantes/$idioma").onChildRemoved.listen((event) {
       resta.removeWhere((element) => element.id == RestauranteModels.fromSnapshot(event.snapshot).id);
+      loandig = false;
       notifyListeners();
     }, onError: (Object error) {
       debugPrint("$error");
     });
-    loandig = false;
     database.child("test/usuarios/favoritos").onChildAdded.listen((event) {
       for (var element in event.snapshot.children) {
         final favorit = FavoritosModels.fromSnapshot(element);
         favorites.add(favorit);
         debugPrint(":${favorit.toJson()}");
       }
+      loandig = false;
+
       notifyListeners();
     });
     database.child("test/usuarios/favoritos").onChildChanged.listen((event) {
@@ -47,6 +49,7 @@ class DataProviders extends ChangeNotifier {
         final favorit = FavoritosModels.fromSnapshot(element);
         favorites.add(favorit);
       }
+      loandig = false;
       debugPrint(":${favorites.length}");
       notifyListeners();
     });

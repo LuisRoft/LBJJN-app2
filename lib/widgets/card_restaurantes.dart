@@ -22,37 +22,45 @@ class CardRestaurantes extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: ColorFiltered(
-                colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.saturation),
-                child: CachedNetworkImage(
-                  imageUrl: restaurante.imagen,
-                  progressIndicatorBuilder: (context, url, downloadProgress) => Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Material(
-                        color: Colors.transparent,
-                        child: CircularProgressIndicator(
-                          value: downloadProgress.progress,
-                        ),
+              // child: ColorFiltered(
+              // colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.saturation),
+              child: CachedNetworkImage(
+                imageUrl: restaurante.imagen,
+                imageBuilder: (context, imageProvider) {
+                  return ColorFiltered(
+                    colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.saturation),
+                    child: Image(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                },
+                progressIndicatorBuilder: (context, url, downloadProgress) => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Material(
+                      color: Colors.transparent,
+                      child: CircularProgressIndicator(
+                        value: downloadProgress.progress,
                       ),
-                    ],
-                  ),
-                  errorWidget: (context, url, error) {
-                    return const Icon(Icons.error);
-                  },
-                  fit: BoxFit.cover,
+                    ),
+                  ],
                 ),
-                // child: Image(
-                //   image: CachedNetworkImageProvider(
-                //     restaurante.imagen,
-                //     errorListener: () {},
-                //   ),
-                //   fit: BoxFit.cover,
-                //   filterQuality: FilterQuality.low,
-                //   height: height,
-                // ),
+                errorWidget: (context, url, error) {
+                  return const Icon(Icons.error);
+                },
               ),
+              // child: Image(
+              //   image: CachedNetworkImageProvider(
+              //     restaurante.imagen,
+              //     errorListener: () {},
+              //   ),
+              //   fit: BoxFit.cover,
+              //   filterQuality: FilterQuality.low,
+              //   height: height,
+              // ),
+              // ),
             ),
             Material(
               color: Colors.transparent,

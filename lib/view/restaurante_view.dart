@@ -2,15 +2,14 @@ import 'dart:math';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:hdt_flutter/helpers/shared_preference_helper.dart';
 import 'package:hdt_flutter/models/menu_model.dart';
 import 'package:hdt_flutter/models/mesa_model.dart';
 import 'package:hdt_flutter/models/restaurante_model.dart';
 import 'package:hdt_flutter/providers/data_providers.dart';
-import 'package:hdt_flutter/utils/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hdt_flutter/widgets/app_bar.dart';
 import 'package:hdt_flutter/widgets/card_restaurantes.dart';
 import 'package:provider/provider.dart';
 
@@ -22,45 +21,7 @@ class RestaurantesView extends StatelessWidget {
     final data = Provider.of<DataProviders>(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-        iconTheme: IconThemeData(color: principal),
-        leadingWidth: 200,
-        leading: Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                context.pop();
-              },
-            ),
-            Text(
-              "${AppLocalizations.of(context)!.restaurante} ",
-              style: TextStyle(
-                color: principal,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
-        ),
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {
-        //       FirebaseDatabase.instance.ref().child("Datos/restaurantes/es").remove();
-        //       FirebaseDatabase.instance.ref().child("Datos/restaurantes/en").remove();
-        //       SharedPreferenceHelper.clearPref();
-        //     },
-        //     icon: const Icon(Icons.deblur),
-        //   ),
-        //   const ElevatedButton(
-        //     onPressed: save,
-        //     child: Text("Guardar"),
-        //   ),
-        // ],
-        elevation: 0,
-      ),
+      appBar: appBars(context, AppLocalizations.of(context)!.restaurante),
       body: data.loandig
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(

@@ -23,7 +23,7 @@ import 'package:provider/provider.dart';
 class AppRouter {
   static GoRouter config() {
     return GoRouter(
-      initialLocation: "/",
+      initialLocation: "/home/perfil",
       routes: [
         ShellRoute(
           builder: (context, state, child) {
@@ -46,14 +46,20 @@ class AppRouter {
                             ? Container(
                                 height: 50,
                               )
-                            : const Padding(
-                                padding: EdgeInsets.only(right: 16),
-                                child: ClipRRect(
-                                  // borderRadius: BorderRadius.all(Radius.circular(100)),
-                                  child: CircleAvatar(
-                                    radius: 25,
-                                    // backgroundColor: Colors.red[800]!, // Color de fondo en caso de error
-                                    child: Text('A'),
+                            : Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: InkWell(
+                                  onTap: () {
+                                    context.goNamed("perfil");
+                                    data.setselect(0);
+                                  },
+                                  child: const ClipRRect(
+                                    // borderRadius: BorderRadius.all(Radius.circular(100)),
+                                    child: CircleAvatar(
+                                      radius: 25,
+                                      // backgroundColor: Colors.red[800]!, // Color de fondo en caso de error
+                                      child: Text('A'),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -90,6 +96,7 @@ class AppRouter {
                             break;
                           case 2:
                             context.go("/carrito");
+                            // context.goNamed("carrito");
                             break;
                           case 3:
                             context.go("/favoritos");
@@ -111,7 +118,7 @@ class AppRouter {
                         ),
                         BottomNavigationBarItem(
                           icon: carrito.todoCarrito.isEmpty
-                              ? const Icon(Icons.notifications)
+                              ? const Icon(Icons.notifications_outlined)
                               : Stack(
                                   children: [
                                     const Icon(Icons.notifications),
@@ -196,6 +203,17 @@ class AppRouter {
                       key: state.pageKey,
                       restorationId: state.pageKey.value,
                       child: const RestaurantesView(),
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: 'perfil',
+                  name: 'perfil',
+                  pageBuilder: (context, state) {
+                    return NoTransitionPage<void>(
+                      key: state.pageKey,
+                      restorationId: state.pageKey.value,
+                      child: const PerfilView(),
                     );
                   },
                 ),
@@ -301,17 +319,6 @@ class AppRouter {
                   key: state.pageKey,
                   restorationId: state.pageKey.value,
                   child: const CarritoView(),
-                );
-              },
-            ),
-            GoRoute(
-              path: '/perfil',
-              name: '/perfil',
-              pageBuilder: (context, state) {
-                return NoTransitionPage<void>(
-                  key: state.pageKey,
-                  restorationId: state.pageKey.value,
-                  child: const PerfilView(),
                 );
               },
             ),
