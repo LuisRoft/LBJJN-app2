@@ -1,6 +1,6 @@
-# hdt_flutter
+# Hermanas Tierra - Develop Branch
 
-A new Flutter project.
+A Flutter project.
 
 ## Getting Started
 
