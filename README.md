@@ -1,4 +1,4 @@
-# hdt_flutter
+# Hermanas Tierra App
 
 A new Flutter project.
 
