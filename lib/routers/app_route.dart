@@ -17,13 +17,14 @@ import 'package:hdt_flutter/view/menu_view.dart';
 import 'package:hdt_flutter/view/mesas_view.dart';
 import 'package:hdt_flutter/view/perfil_view.dart';
 import 'package:hdt_flutter/view/platos_recomendados_view.dart';
+import 'package:hdt_flutter/view/register_view.dart';
 import 'package:hdt_flutter/view/restaurante_view.dart';
 import 'package:provider/provider.dart';
 
 class AppRouter {
   static GoRouter config() {
     return GoRouter(
-      initialLocation: "/home/perfil",
+      initialLocation: "/login",
       routes: [
         ShellRoute(
           builder: (context, state, child) {
@@ -79,6 +80,7 @@ class AppRouter {
               bottomNavigationBar: state.location == "/"
                   ? null
                   : BottomNavigationBar(
+                      type: BottomNavigationBarType.fixed,
                       unselectedItemColor: secundario.withOpacity(0.6),
                       selectedIconTheme: IconThemeData(
                         color: secundario,
@@ -180,7 +182,18 @@ class AppRouter {
                 return NoTransitionPage<void>(
                   key: state.pageKey,
                   restorationId: state.pageKey.value,
-                  child: const LoginView(),
+                  child: LoginView(),
+                );
+              },
+            ),
+            GoRoute(
+              path: '/register',
+              name: '/register',
+              pageBuilder: (context, state) {
+                return NoTransitionPage<void>(
+                  key: state.pageKey,
+                  restorationId: state.pageKey.value,
+                  child: RegisterView(),
                 );
               },
             ),
