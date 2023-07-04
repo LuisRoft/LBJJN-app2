@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -5,6 +6,7 @@ import 'package:hdt_flutter/providers/idioma_providers.dart';
 import 'package:hdt_flutter/utils/const.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class IdiomaView extends StatefulWidget {
   const IdiomaView({super.key});
 

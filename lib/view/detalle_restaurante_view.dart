@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hdt_flutter/models/restaurante_model.dart';
@@ -6,6 +7,7 @@ import 'package:hdt_flutter/widgets/app_bar.dart';
 import 'package:hdt_flutter/widgets/card_detalles.dart';
 import 'package:hdt_flutter/widgets/card_widget.dart';
 
+@RoutePage()
 class DetalleRestauranteView extends StatelessWidget {
   const DetalleRestauranteView({super.key, required this.data});
   final RestauranteModels data;

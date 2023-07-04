@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hdt_flutter/models/favorito_model.dart';
@@ -13,6 +14,7 @@ import 'package:collection/collection.dart' show groupBy;
 import 'package:hdt_flutter/widgets/app_bar.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class MenuView extends StatelessWidget {
   const MenuView({super.key, required this.data});
   final RestauranteModels data;
@@ -37,7 +39,8 @@ class MenuView extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         category,
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const Divider(
@@ -50,73 +53,112 @@ class MenuView extends StatelessWidget {
                       itemCount: categoryDishes.length,
                       itemBuilder: (context, index2) {
                         return Container(
-                          decoration: BoxDecoration(color: carrito.selet == index2 && carrito.seletg == index ? Colors.grey.withOpacity(0.4) : null),
+                          decoration: BoxDecoration(
+                              color: carrito.selet == index2 &&
+                                      carrito.seletg == index
+                                  ? Colors.grey.withOpacity(0.4)
+                                  : null),
                           child: InkWell(
                             onTap: () {
                               carrito.setSelet(index, index2, 0);
-                              NotificacionService.showSnackbarError("Selecione cantidad");
+                              NotificacionService.showSnackbarError(
+                                  "Selecione cantidad");
                             },
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 8, top: 20),
+                              padding: const EdgeInsets.only(
+                                  left: 16, right: 8, top: 20),
                               child: Stack(
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
                                         children: [
                                           Expanded(
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 FittedBox(
                                                   child: Text(
-                                                    categoryDishes[index2].nombre,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    categoryDishes[index2]
+                                                        .nombre,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     softWrap: true,
-                                                    style: const TextStyle(fontSize: 18),
+                                                    style: const TextStyle(
+                                                        fontSize: 18),
                                                   ),
                                                 ),
                                                 const SizedBox(height: 10),
                                                 Text(
                                                   categoryDishes[index2].precio,
-                                                  style: const TextStyle(fontSize: 18),
+                                                  style: const TextStyle(
+                                                      fontSize: 18),
                                                 ),
                                                 const SizedBox(height: 15),
                                                 FittedBox(
                                                   child: TextButton(
-                                                    onPressed: carrito.selet == index2 && carrito.seletg == index && carrito.cant != 0
+                                                    onPressed: carrito.selet ==
+                                                                index2 &&
+                                                            carrito.seletg ==
+                                                                index &&
+                                                            carrito.cant != 0
                                                         ? () {
-                                                            debugPrint("${carrito.cant * double.parse(categoryDishes[index2].precio)}");
-                                                            final data1 = RestauranteModels(
+                                                            debugPrint(
+                                                                "${carrito.cant * double.parse(categoryDishes[index2].precio)}");
+                                                            final data1 =
+                                                                RestauranteModels(
                                                               id: data.id,
-                                                              nombre: data.nombre,
-                                                              descripcion: data.descripcion,
-                                                              estado: data.estado,
-                                                              imagen: data.imagen,
+                                                              nombre:
+                                                                  data.nombre,
+                                                              descripcion: data
+                                                                  .descripcion,
+                                                              estado:
+                                                                  data.estado,
+                                                              imagen:
+                                                                  data.imagen,
                                                               mesas: [],
                                                               menu: [
-                                                                categoryDishes[index2],
+                                                                categoryDishes[
+                                                                    index2],
                                                               ],
                                                             );
-                                                            carrito.setaddCarrito(data1);
-                                                            NotificacionService.showSnackbarError(AppLocalizations.of(context)!.agregarcarrito);
+                                                            carrito
+                                                                .setaddCarrito(
+                                                                    data1);
+                                                            NotificacionService
+                                                                .showSnackbarError(
+                                                                    AppLocalizations.of(
+                                                                            context)!
+                                                                        .agregarcarrito);
                                                             // Future.delayed(const Duration(seconds: 2), () {
                                                             //   context.push("/carrito");
                                                             // });
                                                           }
                                                         : () {
-                                                            carrito.setSelet(index, index2, 0);
-                                                            NotificacionService.showSnackbarError(AppLocalizations.of(context)!.select);
+                                                            carrito.setSelet(
+                                                                index,
+                                                                index2,
+                                                                0);
+                                                            NotificacionService
+                                                                .showSnackbarError(
+                                                                    AppLocalizations.of(
+                                                                            context)!
+                                                                        .select);
                                                           },
                                                     child: const Row(
                                                       children: [
                                                         Icon(Icons.add),
                                                         Text(
                                                           "Añadir al carrito ",
-                                                          style: TextStyle(fontSize: 18),
+                                                          style: TextStyle(
+                                                              fontSize: 18),
                                                         ),
                                                       ],
                                                     ),
@@ -131,7 +173,8 @@ class MenuView extends StatelessWidget {
                                               datos.comprobarfa(
                                                 FavoritosModels(
                                                   idresta: data.id,
-                                                  idmenu: categoryDishes[index2].id,
+                                                  idmenu:
+                                                      categoryDishes[index2].id,
                                                 ),
                                               )
                                                   ? Icons.bookmark
@@ -141,14 +184,17 @@ class MenuView extends StatelessWidget {
                                             onPressed: datos.comprobarfa(
                                               FavoritosModels(
                                                 idresta: data.id,
-                                                idmenu: categoryDishes[index2].id,
+                                                idmenu:
+                                                    categoryDishes[index2].id,
                                               ),
                                             )
                                                 ? () {
                                                     datos.remover(
                                                       "test/usuarios/favoritos/${data.id}/${categoryDishes[index2].id}",
                                                       idresta: data.id,
-                                                      idmenu: categoryDishes[index2].id,
+                                                      idmenu:
+                                                          categoryDishes[index2]
+                                                              .id,
                                                     );
                                                   }
                                                 : () {
@@ -157,7 +203,9 @@ class MenuView extends StatelessWidget {
                                                       "test/usuarios/favoritos/${data.id}/${categoryDishes[index2].id}",
                                                       data: FavoritosModels(
                                                         idresta: data.id,
-                                                        idmenu: categoryDishes[index2].id,
+                                                        idmenu: categoryDishes[
+                                                                index2]
+                                                            .id,
                                                       ).toJson(),
                                                     );
                                                   },
@@ -166,23 +214,34 @@ class MenuView extends StatelessWidget {
                                             height: 110,
                                             width: 170,
                                             child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(15),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
                                               child: CachedNetworkImage(
-                                                imageUrl: categoryDishes[index2].imagen,
-                                                progressIndicatorBuilder: (context, url, downloadProgress) => Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                imageUrl: categoryDishes[index2]
+                                                    .imagen,
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                            downloadProgress) =>
+                                                        Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
                                                   children: [
                                                     Material(
                                                       color: Colors.transparent,
-                                                      child: CircularProgressIndicator(
-                                                        value: downloadProgress.progress,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                                errorWidget: (context, url, error) {
-                                                  return const Icon(Icons.error);
+                                                errorWidget:
+                                                    (context, url, error) {
+                                                  return const Icon(
+                                                      Icons.error);
                                                 },
                                                 fit: BoxFit.cover,
                                               ),
@@ -199,35 +258,55 @@ class MenuView extends StatelessWidget {
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
-                                      carrito.selet == index2 && carrito.seletg == index
+                                      carrito.selet == index2 &&
+                                              carrito.seletg == index
                                           ? FittedBox(
                                               child: Row(
                                                 children: [
                                                   Text(
-                                                    AppLocalizations.of(context)!.cant(carrito.cant),
-                                                    style: TextStyle(fontSize: 18, color: principal),
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .cant(carrito.cant),
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: principal),
                                                   ),
                                                   Column(
-                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
                                                     children: [
                                                       Container(
-                                                        padding: const EdgeInsets.all(0.0), // Eliminar todo el relleno
+                                                        padding: const EdgeInsets
+                                                                .all(
+                                                            0.0), // Eliminar todo el relleno
                                                         child: InkWell(
                                                           onTap: () {
                                                             // Acción a realizar cuando se toca el widget
-                                                            carrito.setincreCant(1);
+                                                            carrito
+                                                                .setincreCant(
+                                                                    1);
                                                           },
-                                                          child: Icon(Icons.keyboard_arrow_up_outlined, color: principal),
+                                                          child: Icon(
+                                                              Icons
+                                                                  .keyboard_arrow_up_outlined,
+                                                              color: principal),
                                                         ),
                                                       ),
                                                       Container(
-                                                        padding: const EdgeInsets.all(0.0), // Eliminar todo el relleno
+                                                        padding: const EdgeInsets
+                                                                .all(
+                                                            0.0), // Eliminar todo el relleno
                                                         child: InkWell(
                                                           onTap: () {
                                                             // Acción a realizar cuando se toca el widget
-                                                            carrito.setdecreCant(1);
+                                                            carrito
+                                                                .setdecreCant(
+                                                                    1);
                                                           },
-                                                          child: Icon(Icons.keyboard_arrow_down_outlined, color: principal),
+                                                          child: Icon(
+                                                              Icons
+                                                                  .keyboard_arrow_down_outlined,
+                                                              color: principal),
                                                         ),
                                                       )
                                                     ],

@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hdt_flutter/models/restaurante_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hdt_flutter/widgets/app_bar.dart';
 
+@RoutePage()
 class MesasView extends StatelessWidget {
   const MesasView({super.key, required this.data});
   final RestauranteModels data;
@@ -30,13 +32,16 @@ class MesasView extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 12, bottom: 12),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: data.mesas[index].estado ? Colors.red[200] : Colors.green[200],
+                      color: data.mesas[index].estado
+                          ? Colors.red[200]
+                          : Colors.green[200],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text("#${index + 1}"),
-                        Text(AppLocalizations.of(context)!.pers(data.mesas[index].canti)),
+                        Text(AppLocalizations.of(context)!
+                            .pers(data.mesas[index].canti)),
                       ],
                     ),
                   ),

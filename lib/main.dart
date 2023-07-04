@@ -8,7 +8,7 @@ import 'package:hdt_flutter/providers/carrito_provider.dart';
 import 'package:hdt_flutter/providers/data_providers.dart';
 import 'package:hdt_flutter/providers/idioma_providers.dart';
 import 'package:hdt_flutter/providers/menu_providers.dart';
-import 'package:hdt_flutter/routers/app_route.dart';
+import 'package:hdt_flutter/routers/app_route2.dart';
 import 'package:hdt_flutter/service/notificacion_service.dart';
 import 'package:hdt_flutter/utils/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -57,6 +57,7 @@ class _MyMaterialAppState extends State<MyMaterialApp> {
 
   @override
   Widget build(BuildContext context) {
+    AppRouter appRouter = AppRouter();
     final idioma = Provider.of<IdiomaProviders>(context);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
@@ -74,7 +75,7 @@ class _MyMaterialAppState extends State<MyMaterialApp> {
         primarySwatch: createMaterialColor(principal),
         fontFamily: 'FutuBk',
       ),
-      routerConfig: AppRouter.config(),
+      routerConfig: appRouter.config(),
     );
   }
 }
